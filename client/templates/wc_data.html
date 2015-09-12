@@ -1,0 +1,15 @@
+<template name="wcData">
+  <div class="data-block">
+    <div class="small-2 large-4 columns">
+      <div class="data-block-title">Information</div>
+      {{#if data}}
+        <div class="data-date">Date: {{data.date}}</div>
+        <div class="data-waterbody">Water Body: {{data.waterbody}}</div>
+        <div class="data-station-name">Station Name: {{data.stationName}}</div>
+        <div class="data-lat">Latitude: {{data.lat}}</div>
+        <div class="data-lng">Longitude: {{data.lng}}</div>
+        <div class="data-air-temp">Air Temperature (Degrees C): {{data.airTemp}}</div>
+      {{/if}}
+      </div>
+  </div>
+</template>

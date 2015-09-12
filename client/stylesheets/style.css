@@ -1,0 +1,15 @@
+.data-block {
+}
+
+.data-block .data-block-title {
+  font-family: arial;
+  font-weight: bold;
+}
+
+.station {
+  text-align: center;
+}
+
+.station a:hover {
+  background-color: grey;
+}

@@ -1,0 +1,11 @@
+<template name="wcDates">
+  <ul class="side-nav small-1 large-2 columns">
+    {{#if dates}}
+    {{#each dates}}
+    <li class="row date" id="{{index}}">
+      <a href="#">{{date}}</a>
+    </li>
+    {{/each}}
+    {{/if}}
+  </ul>
+</template>
