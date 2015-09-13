@@ -1,22 +1,3 @@
-var testData = [
-  {
-    date: '11/21/2013',
-    waterbody: 'Matadero',
-    stationName: 'M1',
-    lat: 37.404611,
-    lng: -122.157279,
-    airTemp: 16.5
-  },
-  {
-    date: '1/30/2014',
-    waterbody: 'Matadero',
-    stationName: 'M1',
-    lat: 37.404611,
-    lng: -122.157279,
-    airTemp: 17.0
-  }
-];
-
 Template.wcStations.helpers({
   stations: function() {
     var stations = Stations.find().fetch();
@@ -54,13 +35,6 @@ Template.wcDates.helpers({
     } else {
       return false;
     }
-
-    // return testData.map(function(data, index) {
-    //   return {
-    //     date: data.date,
-    //     index: index
-    //   }
-    // });
   }
 });
 
@@ -81,12 +55,5 @@ Template.wcData.helpers({
         }
       }
     }
-
-
-    // if(testData[Session.get('dataIndex')]) {
-    //   return testData[Session.get('dataIndex')];
-    // } else {
-    //   return false;
-    // }
   }
 });
