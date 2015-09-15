@@ -1,9 +1,3 @@
-if(Meteor.isClient) {
-  Meteor.startup(function() {
-    GoogleMaps.load();
-  });
-}
-
 Template.wcStations.helpers({
   stations: function() {
     var stations = Stations.find().fetch();
@@ -64,6 +58,12 @@ Template.wcData.helpers({
   }
 });
 
+if(Meteor.isClient) {
+  Meteor.startup(function() {
+    GoogleMaps.load();
+  });
+}
+
 Template.map.helpers({
   mapOptions: function() {
     if(GoogleMaps.loaded()) {
@@ -75,16 +75,13 @@ Template.map.helpers({
   }
 });
 
-Template.map.onCreated(function() {
-  console.log('map onCreated');
+Template.map.onRendered(function() {
     GoogleMaps.ready('map', function(map) {
-      var stations = Stations.find();
-      console.log('gmaps callback stations: ', stations);
         var i = 0;
+        var stations = Stations.find().fetch();
         stations.forEach(function(station) {
           var marker = new google.maps.Marker({
             draggable: false,
-            // animation: google.maps.Animation.DROP,
             position: new google.maps.LatLng(station.lat, station.lng),
             map: map.instance,
             id: i
@@ -92,7 +89,6 @@ Template.map.onCreated(function() {
           google.maps.event.addListener(marker, 'click', function(event) {
             Session.set('stationIndex', this.id);
           });
-          console.log('created marker: ', i);
           i++;
         });
     });
