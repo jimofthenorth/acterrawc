@@ -1,6 +1,8 @@
-Meteor.startup(function() {
-  GoogleMaps.load();
-});
+if(Meteor.isClient) {
+  Meteor.startup(function() {
+    GoogleMaps.load();
+  });
+}
 
 Template.wcStations.helpers({
   stations: function() {
@@ -74,22 +76,24 @@ Template.map.helpers({
 });
 
 Template.map.onCreated(function() {
-  GoogleMaps.ready('map', function(map) {
-    var markers = {};
-    var stations = Stations.find().fetch();
-    if(stations) {
-      for(var i = 0; i < stations.length; i++) {
-        var marker = new google.maps.Marker({
-          draggable: false,
-          animation: google.maps.Animation.DROP,
-          position: new google.maps.LatLng(stations[i].lat, stations[i].lng),
-          map: map.instance,
-          id: i
+  console.log('map onCreated');
+    GoogleMaps.ready('map', function(map) {
+      var stations = Stations.find();
+      console.log('gmaps callback stations: ', stations);
+        var i = 0;
+        stations.forEach(function(station) {
+          var marker = new google.maps.Marker({
+            draggable: false,
+            // animation: google.maps.Animation.DROP,
+            position: new google.maps.LatLng(station.lat, station.lng),
+            map: map.instance,
+            id: i
+          });
+          google.maps.event.addListener(marker, 'click', function(event) {
+            Session.set('stationIndex', this.id);
+          });
+          console.log('created marker: ', i);
+          i++;
         });
-        google.maps.event.addListener(marker, 'click', function(event) {
-          Session.set('stationIndex', this.id);
-        });
-      }
-    }
-  });
+    });
 });

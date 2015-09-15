@@ -1,5 +1,7 @@
 <template name="wcDates">
-  <ul class="side-nav small-1 large-2 columns">
+  <div class="small-1 large-2 columns dates-block">
+  <div class="dates-title">Dates</div>
+  <ul class="side-nav">
     {{#if dates}}
     {{#each dates}}
     <li class="row date" id="{{index}}">
@@ -8,4 +10,5 @@
     {{/each}}
     {{/if}}
   </ul>
+  </div>
 </template>

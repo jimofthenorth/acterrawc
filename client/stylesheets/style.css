@@ -6,6 +6,16 @@
   font-weight: bold;
 }
 
+.dates-block {
+  background-color: #8DA335;
+  height: 400px;
+}
+
+.dates-block .dates-title {
+  font-family: : arial;
+  font-weight: bold;
+}
+
 .station {
   text-align: center;
 }
