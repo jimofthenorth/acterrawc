@@ -1,3 +1,7 @@
+Meteor.startup(function() {
+  GoogleMaps.load();
+});
+
 Template.wcStations.helpers({
   stations: function() {
     var stations = Stations.find().fetch();
@@ -54,6 +58,17 @@ Template.wcData.helpers({
           return stationDates.samples[Session.get('dataIndex')];
         }
       }
+    }
+  }
+});
+
+Template.map.helpers({
+  mapOptions: function() {
+    if(GoogleMaps.loaded()) {
+      return {
+        center: new google.maps.LatLng(37.431921, -122.103168),
+        zoom: 11
+      };
     }
   }
 });

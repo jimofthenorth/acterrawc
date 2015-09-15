@@ -13,3 +13,9 @@
 .station a:hover {
   background-color: grey;
 }
+
+.map-container {
+  width: 100%;
+  max-width: 100%;
+  height: 400px;
+}
