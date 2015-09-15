@@ -72,3 +72,24 @@ Template.map.helpers({
     }
   }
 });
+
+Template.map.onCreated(function() {
+  GoogleMaps.ready('map', function(map) {
+    var markers = {};
+    var stations = Stations.find().fetch();
+    if(stations) {
+      for(var i = 0; i < stations.length; i++) {
+        var marker = new google.maps.Marker({
+          draggable: false,
+          animation: google.maps.Animation.DROP,
+          position: new google.maps.LatLng(stations[i].lat, stations[i].lng),
+          map: map.instance,
+          id: i
+        });
+        google.maps.event.addListener(marker, 'click', function(event) {
+          Session.set('stationIndex', this.id);
+        });
+      }
+    }
+  });
+});

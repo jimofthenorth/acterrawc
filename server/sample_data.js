@@ -1,6 +1,8 @@
 if(Stations.find().count() === 0) {
   Stations.insert({
     stationName: 'M1',
+    lat: 37.404611,
+    lng: -122.157279,
     samples: [
       {
         date: '11/21/2013',
@@ -23,6 +25,8 @@ if(Stations.find().count() === 0) {
 
   Stations.insert({
     stationName: 'M2',
+    lat: 37.409526,
+    lng: -122.138392,
     samples: [
       {
         date: '12/21/2013',
