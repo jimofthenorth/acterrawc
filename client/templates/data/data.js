@@ -89,6 +89,7 @@ Template.map.onCreated(function() {
           });
           google.maps.event.addListener(marker, 'click', function(event) {
             Session.set('stationIndex', this.id);
+            Session.set('dataIndex', 0);
           });
           i++;
         });

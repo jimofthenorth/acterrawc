@@ -12,8 +12,25 @@
 }
 
 .dates-block .dates-title {
-  font-family: : arial;
+  font-family: arial;
   font-weight: bold;
+}
+
+.dates-block .date-line {
+  font-family: arial;
+  text-align: center;
+  background: rgb(255,103,10); /* Old browsers */
+  background: -moz-linear-gradient(left,  rgba(255,103,10,1) 0%, rgba(239,117,10,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,103,10,1)), color-stop(100%,rgba(239,117,10,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* IE10+ */
+  background: linear-gradient(to right,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670a', endColorstr='#ef750a',GradientType=1 ); /* IE6-9 */
+}
+
+.dates-block .date-line:hover {
+  background: slategrey;
 }
 
 .station {
@@ -21,7 +38,7 @@
 }
 
 .station a:hover {
-  background-color: grey;
+  background-color: slategrey;
 }
 
 .map-container {
