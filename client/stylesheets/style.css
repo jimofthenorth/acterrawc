@@ -54,3 +54,52 @@
   font-family: arial;
   font-size: 8pt;
 }
+
+#not-found {
+/*  font-family: arial;
+  font-size: 30pt;
+  font-weight: bold;
+  text-align: center;*/
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}
+
+.not-found-title {
+  font-family: arial;
+  font-size: 30pt;
+  font-weight: bold;
+  text-align: center;
+}
+
+.not-found-text {
+  font-family: arial;
+  font-size: 12pt;
+  text-align: center;
+}
+
+.not-found-button {
+  font-family: arial;
+  text-align: center;
+  font-size: 10pt;
+  padding: 5px;
+  margin: 1px;
+  background: rgb(255,103,10); /* Old browsers */
+  background: -moz-linear-gradient(left,  rgba(255,103,10,1) 0%, rgba(239,117,10,1) 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,103,10,1)), color-stop(100%,rgba(239,117,10,1))); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* IE10+ */
+  background: linear-gradient(to right,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670a', endColorstr='#ef750a',GradientType=1 ); /* IE6-9 */
+}
+
+.not-found-button:hover {
+  background: slategrey;
+}
