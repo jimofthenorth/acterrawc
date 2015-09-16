@@ -27,7 +27,7 @@ Template.wcDates.helpers({
         var stationDates = stations[Session.get('stationIndex')];
         return stationDates.samples.map(function(data, index) {
           return {
-            date: data.date,
+            date: data['Date'],
             index: index
           }
         });
@@ -51,7 +51,14 @@ Template.wcData.helpers({
       if(stations[Session.get('stationIndex')]) {
         var stationDates = stations[Session.get('stationIndex')];
         if(stationDates.samples[Session.get('dataIndex')]) {
-          return stationDates.samples[Session.get('dataIndex')];
+          var results = [];
+          var data = stationDates.samples[Session.get('dataIndex')];
+          results.push({key: 'Latitude', value: stationDates.lat});
+          results.push({key: 'Longitude', value: stationDates.lng});
+          for(key in data) {
+            results.push({key: key, value: data[key]});
+          }
+          return results;
         }
       }
     }
@@ -78,19 +85,38 @@ Template.map.helpers({
 Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
         var i = 0;
+        var lastOpen;
         this.stations = Stations.find().fetch();
         console.log(this.stations);
         this.stations.forEach(function(station) {
+          var content = '<div class="info-window>"' +
+            '<div class="info-window-station">Station: ' + station.stationName + '</div>' +
+            '<div class="info-window-body">Water Body: ' + station.waterBody + '</div>' +
+            '<div class="info-window-body">Latitude: ' + station.lat + '</div>' +
+            '<div class="info-window-body">Longitude: ' + station.lng + '</div>' +
+            '</div>';
+
+          var infowindow = new google.maps.InfoWindow({
+            content: content
+          });
+
           var marker = new google.maps.Marker({
             draggable: false,
             position: new google.maps.LatLng(station.lat, station.lng),
             map: map.instance,
             id: i
           });
+
           google.maps.event.addListener(marker, 'click', function(event) {
             Session.set('stationIndex', this.id);
             Session.set('dataIndex', 0);
+            if(lastOpen) {
+              lastOpen.close();
+            }
+            lastOpen = infowindow;
+            infowindow.open(map.instance, marker);
           });
+
           i++;
         });
     });

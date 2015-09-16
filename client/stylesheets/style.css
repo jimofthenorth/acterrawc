@@ -1,9 +1,11 @@
 .data-block {
+  float: left;
 }
 
 .data-block .data-block-title {
   font-family: arial;
   font-weight: bold;
+  text-align: center;
 }
 
 .dates-block {
@@ -14,11 +16,15 @@
 .dates-block .dates-title {
   font-family: arial;
   font-weight: bold;
+  text-align: center;
 }
 
 .dates-block .date-line {
   font-family: arial;
   text-align: center;
+  font-size: 10pt;
+  padding: 5px;
+  margin: 1px;
   background: rgb(255,103,10); /* Old browsers */
   background: -moz-linear-gradient(left,  rgba(255,103,10,1) 0%, rgba(239,117,10,1) 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,103,10,1)), color-stop(100%,rgba(239,117,10,1))); /* Chrome,Safari4+ */
@@ -33,16 +39,19 @@
   background: slategrey;
 }
 
-.station {
-  text-align: center;
-}
-
-.station a:hover {
-  background-color: slategrey;
-}
-
 .map-container {
   width: 100%;
   max-width: 100%;
   height: 400px;
+}
+
+.info-window-station {
+  font-family: arial;
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.info-window-body {
+  font-family: arial;
+  font-size: 8pt;
 }

@@ -1,16 +1,12 @@
 <template name="wcData">
-    <div class="small-2 large-4 columns data-block">
-      <div class="data-block-title">Information</div>
+  <div class="row data-block">
+    <div class="small-12 columns">
+      <div class="data-block-title">Water Quality Data</div>
       {{#if data}}
-        <div class="data-date">Date: {{data.date}}</div>
-        <div class="data-waterbody">Water Body: {{data.waterbody}}</div>
-        <div class="data-station-name">Station Name: {{data.stationName}}</div>
-        <div class="data-lat">Latitude: {{data.lat}}</div>
-        <div class="data-lng">Longitude: {{data.lng}}</div>
-        <div class="data-air-temp">Air Temperature (Degrees C): {{data.airTemp}}</div>
-        <div class="data-ph">pH: {{data.pH}}</div>
-        <div class="data-turbidity">Turbidity: {{data.turbidity}}</div>
-        <div class="data-conductivity">Conductivity: {{data.conductivity}}</div>
+        {{#each data}}
+          <div class="data">{{key}}: {{value}}</div>
+        {{/each}}
       {{/if}}
     </div>
+  </div>
 </template>

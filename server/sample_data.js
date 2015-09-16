@@ -3,50 +3,43 @@ if(Stations.find().count() === 0) {
     stationName: 'M1',
     lat: 37.404611,
     lng: -122.157279,
+    waterBody: 'Matadero',
     samples: [
       {
-        date: '11/21/2013',
-        waterbody: 'Matadero',
-        stationName: 'M1',
-        lat: 37.404611,
-        lng: -122.157279,
-        airTemp: 16.5,
-        pH: 7.61,
-        turbidity: 12,
-        conductivity: 1316
+        'Date': '11/21/2013',
+        'Water Body': 'Matadero',
+        'Station Name': 'M1',
+        'Air Temperature': 16.5,
+        'pH': 7.61,
+        'Turbidity': 12,
+        'Conductivity': 1316
       },
       {
-        date: '1/30/2014',
-        waterbody: 'Matadero',
-        stationName: 'M1',
-        lat: 37.404611,
-        lng: -122.157279,
-        airTemp: 17.0,
-        pH: 7.97,
-        turbidity: '<5',
-        conductivity: 2060
+        'Date': '1/30/2014',
+        'Water Body': 'Matadero',
+        'Station Name': 'M1',
+        'Air Temperature': 17.0,
+        'pH': 7.97,
+        'Turbidity': '<5',
+        'Conductivity': 2060
       },
       {
-        date: '4/18/2014',
-        waterbody: 'Matadero',
-        stationName: 'M1',
-        lat: 37.404611,
-        lng: -122.157279,
-        airTemp: 20.0,
-        pH: 7.5,
-        turbidity: 0,
-        conductivity: '2.2 mS'
+        'Date': '4/18/2014',
+        'Water Body': 'Matadero',
+        'Station Name': 'M1',
+        'Air Temperature': 20.0,
+        'pH': 7.5,
+        'Turbidity': 0,
+        'Conductivity': '2.2 mS'
       },
       {
-        date: '5/16/2014',
-        waterbody: 'Matadero',
-        stationName: 'M1',
-        lat: 37.404611,
-        lng: -122.157279,
-        airTemp: 24.0,
-        pH: 7.92,
-        turbidity: 1.53,
-        conductivity: 1935
+        'Date': '5/16/2014',
+        'Water Body': 'Matadero',
+        'Station Name': 'M1',
+        'Air Temperature': 24.0,
+        'pH': 7.92,
+        'Turbidity': 1.53,
+        'Conductivity': 1935
       }
     ]
   });
@@ -55,28 +48,25 @@ if(Stations.find().count() === 0) {
     stationName: 'M2',
     lat: 37.409526,
     lng: -122.138392,
+    waterBody: 'Matadero',
     samples: [
       {
-        date: '11/21/2013',
-        waterbody: 'Matadero',
-        stationName: 'M2',
-        lat: 37.409526,
-        lng: -122.138392,
-        airTemp: 'No Data Available',
-        pH: 7.75,
-        turbidity: 20,
-        conductivity: 911
+        'Date': '11/21/2013',
+        'Water Body': 'Matadero',
+        'Station Name': 'M2',
+        'Air Temperature': 'No Data Available',
+        'pH': 7.75,
+        'Turbidity': 20,
+        'Conductivity': 911
       },
       {
-        date: '1/30/2014',
-        waterbody: 'Matadero',
-        stationName: 'M2',
-        lat: 37.409526,
-        lng: -122.138392,
-        airTemp: 15.0,
-        pH: 7.82,
-        turbidity: '<5',
-        conductivity: 1200
+        'Date': '1/30/2014',
+        'Water Body': 'Matadero',
+        'Station Name': 'M2',
+        'Air Temperature': 15.0,
+        'pH': 7.82,
+        'Turbidity': '<5',
+        'Conductivity': 1200
       }
     ]
   });
@@ -85,50 +75,43 @@ if(Stations.find().count() === 0) {
     stationName: 'S1',
     lat: 37.414394,
     lng: -122.189715,
+    waterBody: 'San_Francisquito',
     samples: [
       {
-        date: '11/21/2013',
-        waterbody: 'San_Francisquito',
-        stationName: 'S1',
-        lat: 37.409526,
-        lng: -122.189715,
-        airTemp: 'No Data Available',
-        pH: 7.49,
-        turbidity: 17.5,
-        conductivity: 967
+        'Date': '11/21/2013',
+        'Water Body': 'San_Francisquito',
+        'Station Name': 'S1',
+        'Air Temperature': 'No Data Available',
+        'pH': 7.49,
+        'Turbidity': 17.5,
+        'Conductivity': 967
       },
       {
-        date: '1/25/2014',
-        waterbody: 'San_Francisquito',
-        stationName: 'S1',
-        lat: 37.409526,
-        lng: -122.189715,
-        airTemp: 9.0,
-        pH: 7.82,
-        turbidity: 2,
-        conductivity: 1330
+        'Date': '1/25/2014',
+        'Water Body': 'San_Francisquito',
+        'Station Name': 'S1',
+        'Air Temperature': 9.0,
+        'pH': 7.82,
+        'Turbidity': 2,
+        'Conductivity': 1330
       },
       {
-        date: '2/22/2014',
-        waterbody: 'San_Francisquito',
-        stationName: 'S1',
-        lat: 37.409526,
-        lng: -122.189715,
-        airTemp: 15.0,
-        pH: 7.98,
-        turbidity: 3,
-        conductivity: 1020
+        'Date': '2/22/2014',
+        'Water Body': 'San_Francisquito',
+        'Station Name': 'S1',
+        'Air Temperature': 15.0,
+        'pH': 7.98,
+        'Turbidity': 3,
+        'Conductivity': 1020
       },
       {
-        date: '3/22/2014',
-        waterbody: 'San_Francisquito',
-        stationName: 'S1',
-        lat: 37.409526,
-        lng: -122.189715,
-        airTemp: 16.0,
-        pH: 8,
-        turbidity: 3,
-        conductivity: 9.8
+        'Date': '3/22/2014',
+        'Water Body': 'San_Francisquito',
+        'Station Name': 'S1',
+        'Air Temperature': 16.0,
+        'pH': 8,
+        'Turbidity': 3,
+        'Conductivity': 9.8
       }
     ]
   });
@@ -137,39 +120,34 @@ if(Stations.find().count() === 0) {
     stationName: 'S2',
     lat: 37.41364,
     lng: -122.192693,
+    waterBody: 'San_Francisquito',
     samples: [
       {
-        date: '11/21/2014',
-        waterbody: 'San_Francisquito',
-        stationName: 'S2',
-        lat: 37.41364,
-        lng: -122.192693,
-        airTemp: 10,
-        pH: 7.73,
-        turbidity: 2,
-        conductivity: 1266
+        'Date': '11/21/2014',
+        'Water Body': 'San_Francisquito',
+        'Station Name': 'S2',
+        'Air Temperature': 10,
+        'pH': 7.73,
+        'Turbidity': 2,
+        'Conductivity': 1266
       },
       {
-        date: '1/25/2014',
-        waterbody: 'San_Francisquito',
-        stationName: 'S2',
-        lat: 37.41364,
-        lng: -122.192693,
-        airTemp: 15,
-        pH: 8.3,
-        turbidity: 5,
-        conductivity: 19.8
+        'Date': '1/25/2014',
+        'Water Body': 'San_Francisquito',
+        'Station Name': 'S2',
+        'Air Temperature': 15,
+        'pH': 8.3,
+        'Turbidity': 5,
+        'Conductivity': 19.8
       },
       {
-        date: '3/22/2014',
-        waterbody: 'San_Francisquito',
-        stationName: 'S2',
-        lat: 37.41364,
-        lng: -122.192693,
-        airTemp: 16.0,
-        pH: 8.23,
-        turbidity: 1.18,
-        conductivity: 1500
+        'Date': '3/22/2014',
+        'Water Body': 'San_Francisquito',
+        'Station Name': 'S2',
+        'Air Temperature': 16.0,
+        'pH': 8.23,
+        'Turbidity': 1.18,
+        'Conductivity': 1500
       }
     ]
   })
