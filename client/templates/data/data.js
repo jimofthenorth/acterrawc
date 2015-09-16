@@ -75,11 +75,12 @@ Template.map.helpers({
   }
 });
 
-Template.map.onRendered(function() {
+Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
         var i = 0;
-        var stations = Stations.find().fetch();
-        stations.forEach(function(station) {
+        this.stations = Stations.find().fetch();
+        console.log(this.stations);
+        this.stations.forEach(function(station) {
           var marker = new google.maps.Marker({
             draggable: false,
             position: new google.maps.LatLng(station.lat, station.lng),

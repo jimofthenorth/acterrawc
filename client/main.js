@@ -1,1 +1,1 @@
-Meteor.subscribe('stations');
+// Meteor.subscribe('stations');

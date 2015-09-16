@@ -7,3 +7,4 @@
 meteor-platform
 ewall:foundation
 dburles:google-maps
+iron:router
