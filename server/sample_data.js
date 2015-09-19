@@ -123,7 +123,7 @@ if(Stations.find().count() === 0) {
     waterBody: 'San Francisquito Creek',
     samples: [
       {
-        'Date': '11/21/2014',
+        'Date': '11/21/2013',
         'Water Body': 'San Francisquito Creek',
         'Station Name': 'S2',
         'Air Temperature (Degrees C)': 10,

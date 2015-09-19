@@ -103,3 +103,22 @@
 .not-found-button:hover {
   background: slategrey;
 }
+
+#line-chart {
+
+}
+
+#line-chart .axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#line-chart .line {
+  fill: slategrey;
+  stroke: slategrey;
+  stroke-width: 1.5px;
+}
+
+#line-chart .x.axis path {
+}
