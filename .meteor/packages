@@ -9,3 +9,5 @@ ewall:foundation
 dburles:google-maps
 iron:router
 d3
+accounts-password
+accounts-ui

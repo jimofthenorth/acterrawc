@@ -152,3 +152,10 @@ if(Stations.find().count() === 0) {
     ]
   })
 }
+
+if(Meteor.users.find().count() === 0) {
+  Accounts.createUser({
+    username: Meteor.settings.adminName,
+    password: Meteor.settings.adminPw
+  });
+}
