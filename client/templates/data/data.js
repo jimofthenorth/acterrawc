@@ -90,7 +90,10 @@ Template.wcData.helpers({
 Template.wcData.events({
   'click .data-block-button': function() {
     Session.set('graphUnits', this.key);
+    Meteor.graphFunctions.makeLineChart();
+  }
 
+    /*
     d3.selectAll("g").remove();
 
     var graphKey = Session.get('graphUnits');
@@ -133,9 +136,8 @@ Template.wcData.events({
                     .y(height);
 
 
-    /*
-     * This is if we want an area graph
-     */
+    //This is if we want an area graph
+
     // var area = d3.svg.area()
     //             .interpolate('linear')
     //             .x(function(d) { return x(d.date); })
@@ -220,6 +222,7 @@ Template.wcData.events({
 
     // });  // end Deps.autorun
   }
+  */
 });
 
 if(Meteor.isClient) {
@@ -234,7 +237,8 @@ Template.map.helpers({
       return {
         center: new google.maps.LatLng(37.431921, -122.103168),
         zoom: 11,
-        scrollwheel: false
+        scrollwheel: false,
+        chartCallback: Meteor.graphFunctions
       };
     }
   }
@@ -244,6 +248,7 @@ Template.map.onCreated(function() {
     GoogleMaps.ready('map', function(map) {
         var i = 0;
         var lastOpen;
+
         this.stations = Stations.find().fetch();
         this.stations.forEach(function(station) {
           var content = '<div class="info-window>"' +
@@ -264,10 +269,22 @@ Template.map.onCreated(function() {
             id: i
           });
 
+          var graphUnits = [];
+          if(typeof station.samples[0] === 'object') {
+            for(key in station.samples[0]) {
+              if(typeof station.samples[0][key] === 'number') {
+                graphUnits.push(key);
+              }
+            }
+          }
+          var randomUnit = graphUnits[Math.floor(Math.random() * graphUnits.length)];
+
           google.maps.event.addListener(marker, 'click', function(event) {
             Session.set('stationIndex', this.id);
             Session.set('dataIndex', 0);
+            Session.set('graphUnits', randomUnit);
             d3.selectAll("g").remove();  // clear current graph
+            Meteor.graphFunctions.makeLineChart();
             if(lastOpen) {
               lastOpen.close();
             }
