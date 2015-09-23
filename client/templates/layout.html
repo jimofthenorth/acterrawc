@@ -1,7 +1,7 @@
 <template name="layout">
-{{#if currentUser}}
-  {{> header}}
-{{/if}}
+  {{#if currentUser}}
+    {{> header}}
+  {{/if}}
   <div id="main">
     {{> yield}}
   </div>

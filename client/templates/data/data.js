@@ -44,6 +44,19 @@ Template.wcDates.events({
   }
 });
 
+Template.wcStationInfo.helpers({
+  info: function() {
+    var stations = Stations.find().fetch();
+    if(stations) {
+      if(stations[Session.get('stationIndex')]) {
+        return stations[Session.get('stationIndex')];
+      }
+    } else {
+      return false;
+    }
+  }
+});
+
 Template.wcData.helpers({
   data: function() {
     var stations = Stations.find().fetch();
@@ -52,13 +65,22 @@ Template.wcData.helpers({
         var stationDates = stations[Session.get('stationIndex')];
         if(stationDates.samples[Session.get('dataIndex')]) {
           var results = [];
+          var keyCount = 0;
           var data = stationDates.samples[Session.get('dataIndex')];
-          results.push({key: 'Latitude', value: stationDates.lat});
-          results.push({key: 'Longitude', value: stationDates.lng});
           for(key in data) {
-            results.push({key: key, value: data[key]});
+            var isDataKey = true;
+            if(key === 'Date' || key === 'Water Body' || key === 'Station Name') {
+              isDataKey = false;
+            }
+            if(isDataKey) {
+              results.push({key: key});
+              keyCount++;
+            }
           }
-          return results;
+          return {
+            results: results,
+            keyCount: keyCount
+          }
         }
       }
     }
@@ -66,7 +88,7 @@ Template.wcData.helpers({
 });
 
 Template.wcData.events({
-  'click .data': function() {
+  'click .data-block-button': function() {
     Session.set('graphUnits', this.key);
 
     d3.selectAll("g").remove();
@@ -101,21 +123,30 @@ Template.wcData.events({
                 .scale(y)
                 .orient('left');
 
-    // var line = d3.svg.line()
+    var line = d3.svg.line()
+                .interpolate('linear')
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d.value); });
+
+    var zeroLine = d3.svg.line()
+                    .x(function(d) { return x(d.date); })
+                    .y(height);
+
+
+    /*
+     * This is if we want an area graph
+     */
+    // var area = d3.svg.area()
+    //             .interpolate('linear')
     //             .x(function(d) { return x(d.date); })
-    //             .y(function(d) { return y(d.value); });
+    //             .y0(height)
+    //             .y1(function(d) { return y(d.value); });
 
-    var area = d3.svg.area()
-                .interpolate('linear')
-                .x(function(d) { return x(d.date); })
-                .y0(height)
-                .y1(function(d) { return y(d.value); });
-
-    var zeroArea = d3.svg.area()
-                .interpolate('linear')
-                .x(function(d) { return x(d.date); })
-                .y0(height)
-                .y1(height);
+    // var zeroArea = d3.svg.area()
+    //             .interpolate('linear')
+    //             .x(function(d) { return x(d.date); })
+    //             .y0(height)
+    //             .y1(height);
 
     var svg = d3.select("#line-chart")
               .attr("width", width + margin.left + margin.right)
@@ -132,11 +163,11 @@ Template.wcData.events({
               .append("text")
               .attr("transform", "rotate(-90)")
               .attr("y", 6)
-              .attr("dy", ".71em");
-              // .style("text-anchor", "end")
-              // .text(graphKey);
+              .attr("dy", ".71em")
+              .style("text-anchor", "end")
+              .text(graphKey);
 
-    Deps.autorun(function() {
+    // Deps.autorun(function() {
       var data = [];
       var parseDate = d3.time.format('%m/%d/%Y').parse;
 
@@ -147,17 +178,16 @@ Template.wcData.events({
           data = [];
           dates.forEach(function(date) {
             var value = date[graphKey];
-            if(typeof value !== 'number'){  // we need to make sure the y axis gets a number
-              value = 0;
+            // if y-axis is not getting a number we exclude that data point
+            if(typeof value === 'number') {
+              data.push({
+                date: parseDate(date['Date']),
+                value: value
+              });
             }
-            data.push({
-              date: parseDate(date['Date']),
-              value: value
-            });
           });
         }
       }
-
 
       var paths = svg.selectAll("path.line")
                   .data([data]);
@@ -179,16 +209,16 @@ Template.wcData.events({
       paths.enter()
             .append("path")
             .attr("class", "line")
-            .attr("d", zeroArea)
+            .attr("d", zeroLine)
             .transition()
             .duration(1000)
-            .attr("d", area);
+            .attr("d", line);
 
       // paths.attr('d', line);
 
       paths.exit().remove();
 
-    });
+    // });  // end Deps.autorun
   }
 });
 
@@ -203,7 +233,8 @@ Template.map.helpers({
     if(GoogleMaps.loaded()) {
       return {
         center: new google.maps.LatLng(37.431921, -122.103168),
-        zoom: 11
+        zoom: 11,
+        scrollwheel: false
       };
     }
   }
@@ -236,6 +267,7 @@ Template.map.onCreated(function() {
           google.maps.event.addListener(marker, 'click', function(event) {
             Session.set('stationIndex', this.id);
             Session.set('dataIndex', 0);
+            d3.selectAll("g").remove();  // clear current graph
             if(lastOpen) {
               lastOpen.close();
             }

@@ -1,11 +1,21 @@
 .data-block {
   float: left;
+  width: 100%
 }
 
 .data-block .data-block-title {
   font-family: arial;
   font-weight: bold;
+  text-align: center;
 }
+
+.data-block .row .data-block-button-group {
+  margin: auto;
+  width: 90%;
+}
+/*
+ *
+ * Not using dates block anymore
 
 .dates-block {
   background-color: #8DA335;
@@ -17,8 +27,65 @@
   font-weight: bold;
   text-align: center;
 }
+*/
 
-.dates-block .date-line {
+/*.dates-block .date-line {
+  font-family: arial;
+  text-align: center;
+  font-size: 10pt;
+  padding: 5px;
+  margin: 1px;
+  background: rgb(255,103,10); /* Old browsers */
+/*  background: -moz-linear-gradient(left,  rgba(255,103,10,1) 0%, rgba(239,117,10,1) 100%); /* FF3.6+ */
+/*  background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,103,10,1)), color-stop(100%,rgba(239,117,10,1))); /* Chrome,Safari4+ */
+/*  background: -webkit-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* Chrome10+,Safari5.1+ */
+/*  background: -o-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* Opera 11.10+ */
+/*  background: -ms-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* IE10+ */
+/*  background: linear-gradient(to right,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* W3C */
+/*  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670a', endColorstr='#ef750a',GradientType=1 ); /* IE6-9 */
+/*
+}
+
+.dates-block .date-line:hover {
+  background: slategrey;
+}
+*/
+
+
+.info-block {
+  background-color: #8DA335;
+  height: 400px;
+}
+
+.info-block .info-block-title {
+  font-family: arial;
+  font-weight: bold;
+  text-align: center;
+}
+
+.info-block .info-line-header {
+  font-family: arial;
+  font-weight: bold;
+  font-size: 12pt;
+  padding: 2px;
+  margin-top: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-bottom: 0px;
+}
+
+.info-block .info-line-text {
+  font-family: arial;
+  font-weight: bold;
+  font-size: 10pt;
+  padding: 2px;
+  margin-top: 1px;
+  margin-left: 1px;
+  margin-right: 1px;
+  margin-bottom: 10px;
+}
+
+.info-block .info-block-line {
   font-family: arial;
   text-align: center;
   font-size: 10pt;
@@ -32,10 +99,6 @@
   background: -ms-linear-gradient(left,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* IE10+ */
   background: linear-gradient(to right,  rgba(255,103,10,1) 0%,rgba(239,117,10,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff670a', endColorstr='#ef750a',GradientType=1 ); /* IE6-9 */
-}
-
-.dates-block .date-line:hover {
-  background: slategrey;
 }
 
 .map-container {
@@ -115,9 +178,9 @@
 }
 
 #line-chart .line {
-  fill: slategrey;
+  fill: none;
   stroke: slategrey;
-  stroke-width: 1.5px;
+  stroke-width: 3px;
 }
 
 #line-chart .x.axis path {
