@@ -4,7 +4,7 @@ Template.wcStations.helpers({
     if(stations) {
       return stations.map(function(station, index) {
         return {
-          stationName: station.stationName,
+          stationId: station.samples[0]['Station Name'],
           index: index
         }
       });
@@ -121,7 +121,7 @@ Template.map.onCreated(function() {
         this.stations = Stations.find().fetch();
         this.stations.forEach(function(station) {
           var content = '<div class="info-window>"' +
-            '<div class="info-window-station">Station: ' + station.stationName + '</div>' +
+            '<div class="info-window-station">Station: ' + station.stationId + '</div>' +
             '<div class="info-window-body">Water Body: ' + station.waterBody + '</div>' +
             '<div class="info-window-body">Latitude: ' + station.lat + '</div>' +
             '<div class="info-window-body">Longitude: ' + station.lng + '</div>' +
@@ -164,4 +164,17 @@ Template.map.onCreated(function() {
           i++;
         });
     });
+});
+
+Template.admin.events({
+  'click .read-csv': function(event, template) {
+    event.preventDefault();
+    Papa.parse(template.find("#csv-file").files[0], {
+      header: true,
+      dynamicTyping: true, // parse numbers as numbers, strings as strings
+      complete: function(results) {
+        console.log("Finished parse: ", results);
+      }
+    });
+  }
 });

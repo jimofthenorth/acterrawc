@@ -1,3 +1,13 @@
 <template name="admin">
   {{> header}}
+  {{#if currentUser}}
+    <form>
+      <div class="row">
+        <div class="small-2 medium-4 large-8 columns">
+          <input class="file-upload" id="csv-file" type="file">
+          <button class="small radius button read-csv">Upload</button>
+        </div>
+      </div>
+    </form>
+  {{/if}}
 </template>

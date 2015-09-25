@@ -1,19 +1,10 @@
 if(Stations.find().count() === 0) {
   Stations.insert({
-    stationName: 'M1',
+    stationId: 'M1',
     lat: 37.404611,
     lng: -122.157279,
     waterBody: 'Matadero Creek',
     samples: [
-      {
-        'Date': '11/21/2013',
-        'Water Body': 'Matadero Creek',
-        'Station Name': 'M1',
-        'Air Temperature (Degrees C)': 16.5,
-        'pH': 7.61,
-        'Turbidity (NTU/JTU)': 12,
-        'Conductivity (µS)': 1316
-      },
       {
         'Date': '1/30/2014',
         'Water Body': 'Matadero Creek',
@@ -40,12 +31,21 @@ if(Stations.find().count() === 0) {
         'pH': 7.92,
         'Turbidity (NTU/JTU)': 1.53,
         'Conductivity (µS)': 1935
+      },
+      {
+        'Date': '11/21/2013',
+        'Water Body': 'Matadero Creek',
+        'Station Name': 'M1',
+        'Air Temperature (Degrees C)': 16.5,
+        'pH': 7.61,
+        'Turbidity (NTU/JTU)': 12,
+        'Conductivity (µS)': 1316
       }
     ]
   });
 
   Stations.insert({
-    stationName: 'M2',
+    stationId: 'M2',
     lat: 37.409526,
     lng: -122.138392,
     waterBody: 'Matadero Creek',
@@ -72,7 +72,7 @@ if(Stations.find().count() === 0) {
   });
 
   Stations.insert({
-    stationName: 'S1',
+    stationId: 'S1',
     lat: 37.414394,
     lng: -122.189715,
     waterBody: 'San Francisquito Creek',
@@ -117,7 +117,7 @@ if(Stations.find().count() === 0) {
   });
 
   Stations.insert({
-    stationName: 'S2',
+    stationId: 'S2',
     lat: 37.41364,
     lng: -122.192693,
     waterBody: 'San Francisquito Creek',
