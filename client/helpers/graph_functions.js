@@ -15,7 +15,7 @@ Meteor.graphFunctions = {
     if($(window).width() > 200) {
       width = $(window).width() - 100;
     } else {
-      width = $(widnow).width() - 10;
+      width = $(window).width() - 10;
     }
 
     var x = d3.time.scale()
