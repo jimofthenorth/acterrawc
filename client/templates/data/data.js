@@ -174,6 +174,9 @@ Template.admin.events({
       dynamicTyping: true, // parse numbers as numbers, strings as strings
       complete: function(results) {
         console.log("Finished parse: ", results);
+        Meteor.call("updateData", results, function() {
+          console.log("Finished call to server");
+        })
       }
     });
   }

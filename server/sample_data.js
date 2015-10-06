@@ -1,3 +1,15 @@
+// create an admin user using the specified name and password in settings.json
+if(Meteor.users.find().count() === 0) {
+  Accounts.createUser({
+    username: Meteor.settings.adminName,
+    password: Meteor.settings.adminPw
+  });
+
+  var adminId = Meteor.users.findOne({username: Meteor.settings.adminName})._id;
+  Meteor.users.upsert({_id: adminId}, {$set: {isAdmin: true}});
+}
+
+// Mock data
 if(Stations.find().count() === 0) {
   Stations.insert({
     stationId: 'M1',
@@ -151,11 +163,4 @@ if(Stations.find().count() === 0) {
       }
     ]
   })
-}
-
-if(Meteor.users.find().count() === 0) {
-  Accounts.createUser({
-    username: Meteor.settings.adminName,
-    password: Meteor.settings.adminPw
-  });
 }
