@@ -4,6 +4,38 @@ Meteor.graphFunctions = {
 
     var graphKey = Session.get('graphUnits');
 
+    // Assemble the data
+    var data = [];
+    var parseDate = d3.time.format('%m/%d/%Y').parse;
+
+    var stations = Stations.find().fetch();
+    if(stations) {
+      if(stations[Session.get('stationIndex')]) {
+        var dates = stations[Session.get('stationIndex')].samples;
+        data = [];
+        dates.forEach(function(date) {
+          var value = date[graphKey];
+          // if y-axis is not getting a number we exclude that data point
+          if(typeof value === 'number') {
+            data.push({
+              date: parseDate(date['Date']),
+              value: value
+            });
+          }
+        });
+        // make sure dates are in order for graph
+        data.sort(function(a, b) {
+          if(a.date > b.date) {
+            return 1;
+          }
+          if(a.date < b.date) {
+            return -1;
+          }
+          return 0;
+        });
+      }
+    }
+
     var margin = {
       top: 20,
       right: 20,
@@ -18,13 +50,18 @@ Meteor.graphFunctions = {
       width = $(window).width() - 10;
     }
 
+    // var x = d3.time.scale()
+    //         .range([0, width]);
+
     var x = d3.time.scale()
+            .domain([data[0].date, data[data.length - 1].date])
             .range([0, width]);
+
     var y = d3.scale.linear()
             .range([height, 0]);
 
     var xAxis = d3.svg.axis()
-                .ticks(d3.time.months, 1)
+                // .ticks(d3.time.months, 1)
                 .scale(x)
                 .orient('bottom');
 
@@ -44,6 +81,7 @@ Meteor.graphFunctions = {
 
     /*
      * This is if we want an area graph
+     * Note that the area graph overlaps with the text anchor
      */
     // var area = d3.svg.area()
     //             .interpolate('linear')
@@ -77,36 +115,6 @@ Meteor.graphFunctions = {
               .text(graphKey);
 
     // Deps.autorun(function() {
-      var data = [];
-      var parseDate = d3.time.format('%m/%d/%Y').parse;
-
-      var stations = Stations.find().fetch();
-      if(stations) {
-        if(stations[Session.get('stationIndex')]) {
-          var dates = stations[Session.get('stationIndex')].samples;
-          data = [];
-          dates.forEach(function(date) {
-            var value = date[graphKey];
-            // if y-axis is not getting a number we exclude that data point
-            if(typeof value === 'number') {
-              data.push({
-                date: parseDate(date['Date']),
-                value: value
-              });
-            }
-          });
-          // make sure dates are in order for graph
-          data.sort(function(a, b) {
-            if(a.date > b.date) {
-              return 1;
-            }
-            if(a.date < b.date) {
-              return -1;
-            }
-            return 0;
-          });
-        }
-      }
 
       var paths = svg.selectAll("path.line")
                   .data([data]);
