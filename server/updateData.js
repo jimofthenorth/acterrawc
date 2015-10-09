@@ -46,7 +46,6 @@ Meteor.methods({
         } else {
           // Insert the assembled object for Stations.insert into the database
           Stations.insert(objToInsert);
-          // console.log('DB INSERT: ', objToInsert);
           // Create a new object for Stations.insert
           objToInsert = {
             stationId: data[i]['Station'],
