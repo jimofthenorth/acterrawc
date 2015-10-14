@@ -94,18 +94,66 @@ Template.wcData.events({
     var stations = Stations.find().fetch();
     var data = stations[Session.get('stationIndex')];
     var nums = 0;
+
+    // Here we check to see if we have at least two points of numeric data
+    // for the graph
     for(var i = 0; i < data.samples.length; i++) {
       if(typeof data.samples[i][this.key] === 'number') {
         nums += 1;
       }
     }
-    Session.set('graphUnits', this.key);
+    Session.set('graphUnits', this.key);  // Either way we will set graphUnits
     if(nums > 1) {  // need at least 2 points to make a line
+      Session.set('displayGraph', true);
       Meteor.graphFunctions.makeLineChart();
     } else {
-      console.log('Not enough data points!');
-      // TODO: display information as list of dates and comments
+      d3.selectAll("g").remove();  // clear any existing graph
+      Session.set('displayGraph', false);
     }
+  }
+});
+
+Template.wcComments.helpers({
+  data: function() {
+    var stations = Stations.find().fetch();
+
+    // On first load this is undefined, so we set it
+    if(!Session.get('stationIndex')) {
+      Session.set('stationIndex', 0);
+    }
+
+    var data = stations[Session.get('stationIndex')].samples;
+    var parseDate = d3.time.format('%m/%d/%Y').parse;
+
+    data.sort(function(a, b) {
+      var aDate = parseDate(a['Date']);
+      var bDate = parseDate(b['Date']);
+      if(aDate > bDate) {
+        return 1;
+      }
+      if(aDate < bDate) {
+        return -1;
+      }
+      return 0;
+    });
+
+    var results = [];
+
+    if(!Session.get('displayGraph')) {
+      // Shrink the graph down to nothing
+      var svg = d3.select("#line-chart")
+          .attr("width", 0)
+          .attr("height", 0);
+
+      data.forEach(function(d) {
+        results.push({
+          date: d['Date'],
+          comment: d[Session.get('graphUnits')]
+        });
+      });
+      return results;
+    }
+
   }
 });
 
@@ -153,10 +201,14 @@ Template.map.onCreated(function() {
             id: i
           });
 
+          // Build up an array of possible units to select from.
+          // We want only numeric values and we don't want latitude
+          // or longitude.
           var graphUnits = [];
           if(typeof station.samples[0] === 'object') {
             for(key in station.samples[0]) {
-              if(typeof station.samples[0][key] === 'number') {
+              if(key !== 'Lat' && key !== 'Lng' &&
+                typeof station.samples[0][key] === 'number') {
                 graphUnits.push(key);
               }
             }

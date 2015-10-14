@@ -1,0 +1,16 @@
+<template name="wcComments">
+  {{#if data}}
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Comment</th>
+      </tr>
+      {{#each data}}
+        <tr>
+          <td>{{date}}</td>
+          <td>{{comment}}</td>
+        </tr>
+      {{/each}}
+    </table>
+  {{/if}}
+</template>
