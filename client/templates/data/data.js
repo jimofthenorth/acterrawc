@@ -69,7 +69,9 @@ Template.wcData.helpers({
           var data = stationDates.samples[Session.get('dataIndex')];
           for(key in data) {
             var isDataKey = true;
-            if(key === 'Date' || key === 'Water Body' || key === 'Station Name') {
+            if(key === 'Date' || key === 'Waterbody' || key === 'Station'
+              || key === 'Lat' || key === 'Lng') {
+            // if(typeof data[key] !== 'number' || key === 'Lat' || key === 'Lng') {
               isDataKey = false;
             }
             if(isDataKey) {
@@ -89,8 +91,21 @@ Template.wcData.helpers({
 
 Template.wcData.events({
   'click .data-block-button': function() {
+    var stations = Stations.find().fetch();
+    var data = stations[Session.get('stationIndex')];
+    var nums = 0;
+    for(var i = 0; i < data.samples.length; i++) {
+      if(typeof data.samples[i][this.key] === 'number') {
+        nums += 1;
+      }
+    }
     Session.set('graphUnits', this.key);
-    Meteor.graphFunctions.makeLineChart();
+    if(nums > 1) {  // need at least 2 points to make a line
+      Meteor.graphFunctions.makeLineChart();
+    } else {
+      console.log('Not enough data points!');
+      // TODO: display information as list of dates and comments
+    }
   }
 });
 
@@ -152,7 +167,6 @@ Template.map.onCreated(function() {
             Session.set('stationIndex', this.id);
             Session.set('dataIndex', 0);
             Session.set('graphUnits', randomUnit);
-            d3.selectAll("g").remove();  // clear current graph
             Meteor.graphFunctions.makeLineChart();
             if(lastOpen) {
               lastOpen.close();
