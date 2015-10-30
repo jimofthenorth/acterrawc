@@ -185,3 +185,7 @@
 
 #line-chart .x.axis path {
 }
+
+.comments {
+  display: inline-block;
+}
