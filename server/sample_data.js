@@ -15,7 +15,6 @@ if(Stations.find().count() === 0) {
     stationId: 'M1',
     lat: 37.404611,
     lng: -122.157279,
-    waterBody: 'Matadero Creek',
     samples: [
       {
         'Date': '1/30/2014',
@@ -60,7 +59,6 @@ if(Stations.find().count() === 0) {
     stationId: 'M2',
     lat: 37.409526,
     lng: -122.138392,
-    waterBody: 'Matadero Creek',
     samples: [
       {
         'Date': '11/21/2013',
@@ -87,7 +85,6 @@ if(Stations.find().count() === 0) {
     stationId: 'S1',
     lat: 37.414394,
     lng: -122.189715,
-    waterBody: 'San Francisquito Creek',
     samples: [
       {
         'Date': '11/21/2013',
@@ -132,7 +129,6 @@ if(Stations.find().count() === 0) {
     stationId: 'S2',
     lat: 37.41364,
     lng: -122.192693,
-    waterBody: 'San Francisquito Creek',
     samples: [
       {
         'Date': '11/21/2013',

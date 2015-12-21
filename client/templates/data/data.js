@@ -118,9 +118,9 @@ Template.wcComments.helpers({
     var stations = Stations.find().fetch();
 
     // On first load this is undefined, so we set it
-    if(!Session.get('stationIndex')) {
-      Session.set('stationIndex', 0);
-    }
+    // if(!Session.get('stationIndex')) {
+    //   Session.set('stationIndex', 0);
+    // }
 
     var data = stations[Session.get('stationIndex')].samples;
     var parseDate = d3.time.format('%m/%d/%Y').parse;
@@ -184,8 +184,7 @@ Template.map.onCreated(function() {
         this.stations = Stations.find().fetch();
         this.stations.forEach(function(station) {
           var content = '<div class="info-window>"' +
-            '<div class="info-window-station">Station: ' + station.stationId + '</div>' +
-            // '<div class="info-window-body">Water Body: ' + station.waterBody + '</div>' +
+            '<div class="info-window-station">' + station.stationId + '</div>' +
             '<div class="info-window-body">Latitude: ' + station.lat + '</div>' +
             '<div class="info-window-body">Longitude: ' + station.lng + '</div>' +
             '</div>';
@@ -213,13 +212,16 @@ Template.map.onCreated(function() {
               }
             }
           }
-          var randomUnit = graphUnits[Math.floor(Math.random() * graphUnits.length)];
+          // var randomUnit = graphUnits[Math.floor(Math.random() * graphUnits.length)];
 
           google.maps.event.addListener(marker, 'click', function(event) {
             Session.set('stationIndex', this.id);
             Session.set('dataIndex', 0);
-            Session.set('graphUnits', randomUnit);
-            Meteor.graphFunctions.makeLineChart();
+
+            // Not going to initialize for now, session "displayGraph" starts out falsy
+            // Session.set('graphUnits', randomUnit);
+            // Meteor.graphFunctions.makeLineChart();
+            d3.selectAll("g").remove();
             if(lastOpen) {
               lastOpen.close();
             }
