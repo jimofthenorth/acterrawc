@@ -30,7 +30,7 @@ Meteor.methods({
         stationId: data[0]['Station'],
         lat: data[0]['Lat'],
         lng: data[0]['Lng'],
-        waterBody: data[0]['Waterbody'],
+        // waterBody: data[0]['Waterbody'],
         samples: []
       }
       for(var i = 0; i < data.length; i++) {
@@ -51,7 +51,7 @@ Meteor.methods({
             stationId: data[i]['Station'],
             lat: data[i]['Lat'],
             lng: data[i]['Lng'],
-            waterBody: data[i]['Waterbody'],
+            // waterBody: data[i]['Waterbody'],
             samples: []
           }
         }

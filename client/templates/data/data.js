@@ -185,7 +185,7 @@ Template.map.onCreated(function() {
         this.stations.forEach(function(station) {
           var content = '<div class="info-window>"' +
             '<div class="info-window-station">Station: ' + station.stationId + '</div>' +
-            '<div class="info-window-body">Water Body: ' + station.waterBody + '</div>' +
+            // '<div class="info-window-body">Water Body: ' + station.waterBody + '</div>' +
             '<div class="info-window-body">Latitude: ' + station.lat + '</div>' +
             '<div class="info-window-body">Longitude: ' + station.lng + '</div>' +
             '</div>';
