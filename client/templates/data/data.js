@@ -122,7 +122,10 @@ Template.wcComments.helpers({
     //   Session.set('stationIndex', 0);
     // }
 
-    var data = stations[Session.get('stationIndex')].samples;
+    var data = Session.get('stationIndex') !== undefined ?
+      stations[Session.get('stationIndex')].samples :
+      stations[0].samples;
+
     var parseDate = d3.time.format('%m/%d/%Y').parse;
 
     data.sort(function(a, b) {
@@ -176,10 +179,20 @@ Template.map.helpers({
   }
 });
 
+Template.mapPage.rendered = function() {
+  $("#instruction-modal").foundation("reveal", "open");
+};
+
 Template.map.onCreated(function() {
+
     GoogleMaps.ready('map', function(map) {
         var i = 0;
-        var lastOpen;
+        var lastInfoWindowOpen;
+        var lastMarkerClicked;
+
+        // var BLUE_CIRCLE = 'http://google.com/mapfiles/ms/micons/blue-dot.png';
+        // var RED_CIRCLE = 'http://google.com/mapfiles/ms/micons/red-dot.png';
+
 
         this.stations = Stations.find().fetch();
         this.stations.forEach(function(station) {
@@ -197,7 +210,8 @@ Template.map.onCreated(function() {
             draggable: false,
             position: new google.maps.LatLng(station.lat, station.lng),
             map: map.instance,
-            id: i
+            id: i,
+            // icon: BLUE_CIRCLE
           });
 
           // Build up an array of possible units to select from.
@@ -217,15 +231,20 @@ Template.map.onCreated(function() {
           google.maps.event.addListener(marker, 'click', function(event) {
             Session.set('stationIndex', this.id);
             Session.set('dataIndex', 0);
+            // this.setIcon(RED_CIRCLE);
 
             // Not going to initialize for now, session "displayGraph" starts out falsy
             // Session.set('graphUnits', randomUnit);
             // Meteor.graphFunctions.makeLineChart();
             d3.selectAll("g").remove();
-            if(lastOpen) {
-              lastOpen.close();
+            if(lastInfoWindowOpen) {
+              lastInfoWindowOpen.close();
             }
-            lastOpen = infowindow;
+            // if(lastMarkerClicked) {
+            //   lastMarkerClicked.setIcon(BLUE_CIRCLE);
+            // }
+            lastInfoWindowOpen = infowindow;
+            lastMarkerClicked = this;
             infowindow.open(map.instance, marker);
           });
 
